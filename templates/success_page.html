@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Forma užpildyta sėkmingai!</h1>
+
+{% if data %}
+    {% if data[-1]['email'] %}
+    <p>Jūsų el. paštas: {{ data[-1]['email'] }}</p>
+    {% endif %}
+{% endif %}
+
+{% if form %}
+<p>Jūsų el. paštas: {{ form.email.data }}</p>
+{% endif %}
+
+
+{% endblock %}
