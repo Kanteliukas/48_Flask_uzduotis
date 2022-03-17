@@ -7,7 +7,8 @@ DOUBLE_BRACKET_RIGHT = '}}'
 CURRENT_DIRECTORY = os.getcwd()
 
 def prepare_check_data(element, ending_element):
-    data = f'''{DOUBLE_BRACKET_LEFT} form.{element}(class="form-check-input") {DOUBLE_BRACKET_RIGHT}
+    data = f'''
+        {DOUBLE_BRACKET_LEFT} form.{element}(class="form-check-input") {DOUBLE_BRACKET_RIGHT}
         {DOUBLE_BRACKET_LEFT} form.{element}.label(class="form-check-label") {DOUBLE_BRACKET_RIGHT}
         {ending_element}'''
 
@@ -26,11 +27,12 @@ def prepare_data():
 
     for element in fields:
         form_element_right = f'(class="form-control") {DOUBLE_BRACKET_RIGHT}'
-        ending_element = f'''{BRACKET_LEFT}% if form.{element}.errors %{BRACKET_RIGHT}
-                    {BRACKET_LEFT}% for error in form.{element}.errors %{BRACKET_RIGHT}
-                    <small><font color="red"> {DOUBLE_BRACKET_LEFT}error{DOUBLE_BRACKET_RIGHT} </font></small>
-                    {BRACKET_LEFT}% endfor %{BRACKET_RIGHT}
-                    {BRACKET_LEFT}% endif %{BRACKET_RIGHT}'''
+        ending_element = f'''
+            {BRACKET_LEFT}% if form.{element}.errors %{BRACKET_RIGHT}
+            {BRACKET_LEFT}% for error in form.{element}.errors %{BRACKET_RIGHT}
+            <small><font color="red"> {DOUBLE_BRACKET_LEFT}error{DOUBLE_BRACKET_RIGHT} </font></small>
+            {BRACKET_LEFT}% endfor %{BRACKET_RIGHT}
+            {BRACKET_LEFT}% endif %{BRACKET_RIGHT}'''
 
         if element == "check":
             data[element] = prepare_check_data(element, ending_element)
@@ -38,7 +40,8 @@ def prepare_data():
             if element in add_placeholder:
                 form_element_right = f'(class="form-control", placeholder="{placeholder[element]}") {DOUBLE_BRACKET_RIGHT}'
 
-            data[element] = f'''{DOUBLE_BRACKET_LEFT} form.{element}.label(class="form-control-label") {DOUBLE_BRACKET_RIGHT}
+            data[element] = f'''
+                {DOUBLE_BRACKET_LEFT} form.{element}.label(class="form-control-label") {DOUBLE_BRACKET_RIGHT}
                 {form_element_left}{element}{form_element_right}
                 {ending_element}'''
 
